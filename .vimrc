@@ -22,6 +22,7 @@ Plugin 'VundleVim/Vundle.vim'
 " fuzzy finder for console
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
+Plugin 'machakann/vim-highlightedyank'
 
 " Auto-complete tool
 " Plugin 'Valloric/YouCompleteMe'
@@ -37,6 +38,9 @@ Plugin 'tomasiser/vim-code-dark'
 call vundle#end()            " required
 " PLUGINS -------------------------------------------------
 
+if !exists('##TextYankPost')
+  map y <Plug>(highlightedyank)
+endif
 
 let g:ycm_auto_trigger = 0
 
@@ -60,7 +64,7 @@ set ruler
 
 "" Blink cursor on insert mode
 let &t_SI = "\e[5 q"
-"let &t_EI = "\e[1 q"
+let &t_EI = "\e[1 q"
 
 " optional reset cursor on start:
 augroup myCmds
@@ -174,3 +178,7 @@ set noshiftround
 set t_Co=256
 "set t_ut=
 colorscheme codedark
+
+" yank highlighting
+highlight HighlightedyankRegion cterm=reverse gui=reverse
+let g:highlightedyank_highlight_duration = -1
