@@ -21,8 +21,6 @@ Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'machakann/vim-highlightedyank'
 
-" lightline bar coloring
-Plugin 'itchyny/lightline.vim'
 " polyglot syntax highlighting
 Plugin 'sheerun/vim-polyglot'
 
@@ -40,6 +38,11 @@ Plugin 'joshdick/onedark.vim'
 " Material theme
 Plugin 'kaicataldo/material.vim'
 
+" Git wrapper for vim
+Plugin 'tpope/vim-fugitive'
+
+" highlighting for f,F,t,T
+Plugin 'unblevable/quick-scope'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 " PLUGINS -------------------------------------------------
@@ -59,6 +62,9 @@ filetype plugin indent on
 " TODO: Pick a leader key
 " let mapleader = ","
 
+" Trigger a highlight in the appropriate direction when pressing these keys:
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
 " Security
 set modelines=0
 
@@ -67,6 +73,9 @@ set number
 
 " Show file stats
 set ruler
+
+" Colored column at 80 chars
+set colorcolumn=80
 
 "" Blink cursor on insert mode
 let &t_SI = "\e[5 q"
@@ -91,11 +100,18 @@ runtime! macros/matchit.vim
 nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
 nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
-" disable wrap
-set nowrap
 
 " Allow hidden buffers
 set hidden
+
+" NERDTree stuff==================================
+" Map Ctrl-n to NerdTree
+map <C-n> :NERDTreeToggle<CR>
+" NERDTress File highlighting function
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+ exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+ exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
 
 " Rendering
 set ttyfast
@@ -209,3 +225,7 @@ colorscheme material
 " yank highlighting
 highlight HighlightedyankRegion cterm=reverse gui=reverse
 let g:highlightedyank_highlight_duration = 500
+
+
+" disable wrap
+set nowrap
