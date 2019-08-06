@@ -11,11 +11,8 @@ filetype off
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 " alternatively, pass a path where Vundle should install plugins
-"
 "call vundle#begin('~/some/path/here')
-
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
@@ -23,6 +20,11 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 Plugin 'machakann/vim-highlightedyank'
+
+" lightline bar coloring
+Plugin 'itchyny/lightline.vim'
+" polyglot syntax highlighting
+Plugin 'sheerun/vim-polyglot'
 
 " Auto-complete tool
 " Plugin 'Valloric/YouCompleteMe'
@@ -33,6 +35,10 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " for the vscode dark color theme
 Plugin 'tomasiser/vim-code-dark'
+" onedark theme
+Plugin 'joshdick/onedark.vim'
+" Material theme
+Plugin 'kaicataldo/material.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -82,8 +88,8 @@ set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
 
 " Move up/down editor lines (in case lines wrap)
-nnoremap j gj
-nnoremap k gk
+nnoremap <expr> k (v:count == 0 ? 'gk' : 'k')
+nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')
 
 " disable wrap
 set nowrap
@@ -96,6 +102,12 @@ set ttyfast
 
 " Status bar
 set laststatus=2
+
+" Persistent undo, even after closing and repoening Vim.
+set undofile
+
+" Instead of stumbling into ex mode, repeat the last macro used.
+nnoremap Q @@
 
 " Last line
 set showmode
@@ -159,7 +171,6 @@ set clipboard+=unnamedplus
 endif
 
 
-
 " VISUAL SETTINGS -----------------------------------------
 " Whitespace
 set wrap
@@ -176,9 +187,25 @@ set noshiftround
 "set listchars=tab:▸\ ,eol:¬
 " Color scheme (terminal)
 set t_Co=256
-"set t_ut=
-colorscheme codedark
+set t_ut=
+
+"let g:onedark_termcolors=16
+" coloring theme
+
+" For Neovim 0.1.3 and 0.1.4 - https://github.com/neovim/neovim/pull/2198
+if (has('nvim'))
+  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
+endif
+
+" For Neovim > 0.1.5 and Vim > patch 7.4.1799 - https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162
+" Based on Vim patch 7.4.1770 (`guicolors` option) - https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd
+" https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
+if (has('termguicolors'))
+  set termguicolors
+endif
+let g:material_theme_style = 'darker'
+colorscheme material
 
 " yank highlighting
 highlight HighlightedyankRegion cterm=reverse gui=reverse
-let g:highlightedyank_highlight_duration = -1
+let g:highlightedyank_highlight_duration = 500
