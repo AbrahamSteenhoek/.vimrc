@@ -56,6 +56,9 @@ let g:ycm_auto_trigger = 0
 " Turn on syntax highlighting
 syntax on
 
+" Relative line numbers
+set nu rnu
+
 " For plugins to load correctly
 filetype plugin indent on
 
