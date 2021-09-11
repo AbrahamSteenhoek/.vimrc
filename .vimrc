@@ -89,4 +89,17 @@ set ruler
 set hidden
 " Persistent undo, even after closing and reopening vim
 set undofile
+set undodir=/home/astee/.undodir
 
+map q: <Nop>
+map Q <Nop>
+command! Wq wq
+
+" autocomplete parens, brackets, etc
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
