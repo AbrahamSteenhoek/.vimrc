@@ -95,11 +95,5 @@ map q: <Nop>
 map Q <Nop>
 command! Wq wq
 
-" autocomplete parens, brackets, etc
-inoremap " ""<left>
-inoremap ' ''<left>
-inoremap ( ()<left>
-inoremap [ []<left>
-inoremap { {}<left>
 inoremap {<CR> {<CR>}<ESC>O
 inoremap {;<CR> {<CR>};<ESC>O
