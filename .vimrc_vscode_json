@@ -1,3 +1,4 @@
+{
     "vim.easymotion": true,
     "vim.incsearch": true,
     "vim.useSystemClipboard": true,
@@ -32,3 +33,4 @@
             "after": ["Ctrl+w","j"]
         }
     ]
+}
