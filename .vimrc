@@ -5,6 +5,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -14,10 +15,19 @@ Plug 'ntpeters/vim-better-whitespace'
 
 Plug 'machakann/vim-highlightedyank'
 
+Plug 'preservim/nerdtree'
+
 " color themes
 Plug 'joshdick/onedark.vim'
+Plug 'tomasiser/vim-code-dark'
 
 call plug#end()
+
+" nerd tree settings
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 " vim-better-whitespace settings
 let g:better_whitespace_ctermcolor='blue'
@@ -46,7 +56,7 @@ set laststatus=2
 set ruler
 set wildmenu
 set number
-set relativenumber
+"set relativenumber
 set noerrorbells
 set mouse=a
 set title
@@ -82,6 +92,12 @@ set smartcase
 set showmatch
 map <leader><space> :let @/=''<cr> " clear search
 
+" Switching Tabs
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
 " Misc.
 " show file stats
 set ruler
@@ -89,11 +105,9 @@ set ruler
 set hidden
 " Persistent undo, even after closing and reopening vim
 set undofile
-set undodir=/home/astee/.undodir
+set undodir=/home/steenha/.vim_undodir
 
-map q: <Nop>
-map Q <Nop>
+"map q: <Nop>
+"map Q <Nop>
 command! Wq wq
 
-inoremap {<CR> {<CR>}<ESC>O
-inoremap {;<CR> {<CR>};<ESC>O
