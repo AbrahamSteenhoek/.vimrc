@@ -50,7 +50,6 @@ if (has('termguicolors'))
 endif
 colorscheme onedark
 
-
 " User interface
 set laststatus=2
 set ruler
